@@ -1,0 +1,104 @@
+@@@@@@@@@@@ MODEL SELECTION  RandomForest @@@@@@@@@@@@@@@@@@@@@@@@@
+
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score
+
+# Initialize the Random Forest model
+rf_model = RandomForestClassifier(n_estimators=2, random_state=42)
+
+# Train the model
+rf_model.fit(X_train, y_train)
+
+# Make predictions
+y_pred = rf_model.predict(X_test)
+
+rf_model.score(X_test, y_test) * 100 
+print(f"Accuracy: {accuracy:.2f}%")
+
+rf_model.score(X_train, y_train) * 100 
+print(f"Accuracy: {accuracy:.2f}%")
+
+
+@@@@@@@@@@@@@@@@@  logistic regression @@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score, confusion_matrix, precision_score
+
+# Logistic Regression Model
+Lr = LogisticRegression()
+Lr.fit(X_train, y_train)
+
+# Predictions
+y_pred = Lr.predict(X_test)
+
+# Accuracy on Test Data
+test_accuracy = accuracy_score(y_test, y_pred) * 100
+
+# Accuracy on Train Data
+train_accuracy = accuracy_score(y_train, Lr.predict(X_train)) * 100
+
+# Confusion Matrix
+conf_matrix = confusion_matrix(y_test, y_pred)
+
+# Precision Score (use 'weighted' for multi-class classification)
+precision = precision_score(y_test, y_pred, average='weighted')
+
+# Print the results
+print(f"Test Accuracy: {test_accuracy:.2f}%")
+print(f"Train Accuracy: {train_accuracy:.2f}%")
+print(f"Confusion Matrix:\n{conf_matrix}")
+print(f"Precision Score: {precision:.2f}")
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@ multiple model check kre @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+from sklearn.naive_bayes import MultinomialNB, BernoulliNB, GaussianNB
+from sklearn.metrics import accuracy_score, confusion_matrix, precision_score
+
+# Initialize models
+BNB = BernoulliNB()
+
+# Train the models
+BNB.fit(x_train, y_train)
+
+# Predictions on test data
+y_pred2 = BNB.predict(x_test)
+
+
+# Model evaluation for BNB
+print("Accuracy Score:", accuracy_score(y_test, y_pred2))
+print("Confusion Matrix:\n", confusion_matrix(y_test, y_pred2))
+print("Precision Score:", precision_score(y_test, y_pred2, average='weighted'))
+ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ multiple model check kre @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.linear_model import LogisticRegression
+from sklearn.svm import SVC
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.metrics import accuracy_score, confusion_matrix, precision_score
+
+# Models ko initialize karna
+models = {
+    'RandomForest': RandomForestClassifier(),
+    'LogisticRegression': LogisticRegression(),
+    'SVM': SVC(),
+    'KNN': KNeighborsClassifier(),
+    'DecisionTree': DecisionTreeClassifier()  # New model added
+}
+
+# Har model ko train aur evaluate karna
+for model_name, model in models.items():
+    # Model ko train karna
+    model.fit(x_train, y_train)
+    
+    # Predictions
+    y_pred = model.predict(x_test)
+    
+    # Model evaluation
+    print(f"----- {model_name} -----")
+    print("Accuracy Score:", accuracy_score(y_test, y_pred))
+    print("Confusion Matrix:\n", confusion_matrix(y_test, y_pred))
+    print("Precision Score:", precision_score(y_test, y_pred, average='weighted'))
+    print("\n")
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@

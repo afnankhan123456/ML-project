@@ -1,0 +1,33 @@
+df['Churn'].value_counts()
+
+X = df.drop(['Churn'], axis=1)  # Features
+y = df['Churn']  # Target
+
+from imblearn.under_sampling import RandomUnderSampler
+
+ru = RandomUnderSampler()
+ru_x, ru_y = ru.fit_resample(X, y)
+
+ru_y.value_counts()
+
+
+
+
+from imblearn.over_sampling import RandomOverSampler
+
+ro = RandomOverSampler()
+ro_x, ro_y = ro.fit_resample(X, y)
+
+ro_y.value_counts()
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ ISSE HUM PREDICTION KREGE KI DATA IMBLANCED HE YA NHI
+
+# Use only important features for training
+X_train_selected = X_train[['Payment Delay', 'Support Calls', 'Tenure']]
+model.fit(X_train_selected, y_train)
+
+new_data = [[0.457627, 0.7, 0.433333]] 
+prediction = model.predict(new_data)
+prediction
+

@@ -1,0 +1,86 @@
+imblanced data over or under sempling linear me use nhi hota 
+
+imblanced data over or under sempling logistic me use  hota 
+
+confuction matrix pression f1 score recall linear me use nhi  hota he 
+
+confuction matrix pression f1 score recall logistic me use hota he 
+
+
+
+
+
+Problem Type	Cross-Validation Type	Kab Use Kare?
+Classification (balanced classes)	K-Fold Cross Validation	Jab class balance ho
+Classification (imbalanced classes)	Stratified K-Fold	Jab class imbalance ho (e.g., fraud detection, churn prediction)
+Regression (normal data)	K-Fold Cross Validation	Sabse common, jab koi imbalance na ho
+Time-Series (chahe classification ho ya regression)	TimeSeriesSplit	Jab data ka time order important ho (e.g., sales, stock)
+Very small dataset	Leave-One-Out (LOOCV)	Jab data bahut kam ho
+
+
+
+1. Data Understanding
+	•	Data ka structure samjho (e.g., features aur target variable kya hain).
+	•	Data ki quality check karo — missing values, outliers, imbalance ka analysis karo.
+
+⸻
+
+2. Data Cleaning
+	•	Missing values ko handle karo (fill karo ya drop karo).
+	•	Outliers ko identify aur handle karo.
+	•	Duplicates ko remove karo.
+	•	Data ko standard format me convert karo (dates, text, etc.).
+
+⸻
+
+3. Features & Target Ko Alag Karna
+	•	Apne target variable ko alag karo aur baaki features ko as input variables use karo.
+
+⸻
+
+4. Train-Test Split
+	•	Data ko do parts me divide karo: ek training ke liye aur ek testing ke liye.
+	•	Training data model ko train karne ke liye, aur testing data model ki performance evaluate karne ke liye.
+
+⸻
+
+5. Imbalanced Data Handling (Training Set Par Hi)
+	•	Agar data imbalanced hai (e.g., ek class ka data zyada hai), to training data par oversampling (SMOTE) ya undersampling apply karo.
+	•	Test data untouched rahega, kyunki test data real-world scenario represent karta hai.
+
+⸻
+
+6. Model Selection
+	•	Different models ko try karo (e.g., Logistic Regression, Random Forest, XGBoost).
+	•	Initial results dekhkar sabse acha model choose karo.
+
+⸻
+
+7. Cross-Validation
+	•	Model ko cross-validation ke through test karo, jisme data ko multiple parts me divide karke model train aur test hota hai.
+	•	Isse model ki stability aur generalization improve hoti hai.
+
+⸻
+
+8. Hyperparameter Tuning
+	•	Best results paane ke liye model ke hyperparameters ko tune karo.
+	•	Grid Search ya Random Search se hyperparameters ke combinations test karo.
+
+⸻
+
+9. Final Model Training
+	•	Hyperparameter tuning ke baad, best hyperparameters ke sath apne model ko poore training data par train karo.
+
+⸻
+
+10. Evaluation on Test Set
+	•	Model ko test data par evaluate karo aur performance metrics (accuracy, precision, recall, F1-score, confusion matrix, ROC-AUC) dekhkar model ki performance assess karo.
+
+⸻
+
+11. (Optional) Model Saving & Deployment
+	•	Agar model satisfactory results de raha ho, to usse save karo aur future predictions ke liye deploy karo
+
+
+
+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

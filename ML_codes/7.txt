@@ -1,0 +1,49 @@
+@@@@@@@@@@@ FEATURE SCALLING @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+1.MIN-MAX SCALLER
+2.STANDARD- SCALLER
+
+.Min-max scaling ka output 0 se 1 ke beech hota hai,
+.Agar feature ka minimum value 10 aur maximum value 100 hai, to Min-Max Scaling ki zaroorat hoti hai,
+
+--------------------------------------------------------------------------------------------------------------
+
+.standard scaling ka output kisi bhi range mein ho sakta hai, negative ya positive values,
+.Standard scaling ka use tab hota hai jab aapko data ko normalize karna ho, 
+.agar aapke data mein negative values hain, toh standard scaling best rahega, agr otlier he to bhi standard best rhega
+.Agar feature ka mean 100 aur standard deviation 50 hai, to Standardization ki zaroorat hoti hai,
+.kyunki yeh data ko mean 0 aur standard deviation 1 ke sath normalize karta hai.
+
+df.describe
+
+######################################## MIN MAX SCALLING  #####################################
+from sklearn.preprocessing import MinMaxScaler
+
+mms_columns = ['Age', 'Tenure', 'Usage Frequency', 'Support Calls', 'Payment Delay', 'Total Spend']
+
+scaler = MinMaxScaler()
+
+
+df[mms_columns] = scaler.fit_transform(df[mms_columns])
+
+
+df.head(2)
+
+
+
+############################################### standard  ##############################################
+from sklearn.preprocessing import StandardScaler
+
+ss = StandardScaler()
+
+# Sirf 'v2' column ko scale karein
+columns_to_scale = ['v2']
+df[columns_to_scale] = ss.fit_transform(df[columns_to_scale])
+
+ya 
+
+# Original DataFrame ke sath merge karen (agar zarurat ho to)
+df_scaled = df.copy()
+df_scaled[columns_to_scale] = scaled_df
+
+df_scaled.head()

@@ -1,0 +1,15 @@
+csv file import krege
+
+df = pd.read_csv(r"C:\Users\AFNAN KHAN\Downloads\nndb_flat.csv")
+pd.set_option('display.max_columns', None)   #isse jitne bhi column hoge wo sabhi disply pr dikhege
+df.head(3)
+
+
+correlation matrix
+
+df = df.corr()
+print(df[['Class']])
+
+
+cd "C:\Users\AFNANKHAN\Desktop\cdms\fraud detectation"
+dir

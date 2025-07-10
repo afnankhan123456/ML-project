@@ -1,0 +1,52 @@
+from sklearn.metrics import confusion_matrix
+
+# Predictions lena                                                                          #[[TN, FP],
+y_pred = rf_model.predict(X_test)                                                              #[FN, TP]]
+
+# Confusion matrix calculate karna
+cf = confusion_matrix(y_test, y_pred)
+
+# Heatmap plot karna
+sns.heatmap(cf, annot=True, fmt='d', cmap='Blues')
+plt.xlabel('Predicted')
+plt.ylabel('Actual')
+plt.title('Confusion Matrix Heatmap')
+plt.show()
+
+
+
+############################################################################
+from sklearn.metrics import precision_score, recall_score, f1_score
+
+# Calculate Precision, Recall, F1 Score
+precision = precision_score(y_test, y_pred) * 100
+recall = recall_score(y_test, y_pred) * 100
+f1 = f1_score(y_test, y_pred) * 100
+
+# Print the metrics
+print(f"Precision: {precision}")
+print(f"Recall: {recall}")
+print(f"F1 Score: {f1}")
+
+
+
+@@@@@@ agr TN TP FN FP me value sahi nahi he to @@@@@@@@@@@@   isko pura use kre niche tk
+
+from sklearn.metrics import confusion_matrix
+y_pred_prob = model.predict_proba(X_test)[:, 1]  # Get probabilities for positive class
+y_pred_new = (y_pred_prob >= 0.2).astype(int)  # Adjust the threshold to 0.4
+cm = confusion_matrix(y_test, y_pred_new)
+print(cm)
+      
+##############
+   
+from sklearn.metrics import confusion_matrix
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Plot the updated confusion matrix
+sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', xticklabels=['Negative', 'Positive'], yticklabels=['Negative', 'Positive'])
+plt.xlabel('Predicted')
+plt.ylabel('Actual')
+plt.title('Confusion Matrix with Threshold 0.2')
+plt.show()

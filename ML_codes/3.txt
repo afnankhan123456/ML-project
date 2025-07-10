@@ -1,0 +1,42 @@
+@@@@ DATA PREPRATION @@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+1.FEATURE SELECTION
+2.TARGET SELECTION
+
+(1). FEATURE SELECTION (Relevant Features ko Select Karna)
+from sklearn.feature_selection import mutual_info_classif
+
+X = df.drop(columns=['Class']) 
+y = df['Class']
+
+# Calculate Mutual Information between features and target variable
+mi = mutual_info_classif(X, y)
+
+# Create a DataFrame for better visualization
+mi_df = pd.DataFrame({'Feature': X.columns, 'Mutual Information': mi})
+
+# Sort the DataFrame by Mutual Information
+mi_df = mi_df.sort_values(by='Mutual Information', ascending=False)
+
+print(mi_df)
+
+
+(2). TARGET SELECTION    Output Label ya Target Variable ko Define Karna)
+Target selection ka matlab hai ki aapko yeh define karna hota hai ki aapka model kis variable ko predict karega. Is variable ko "target variable" ya "output label" kehte hain.
+
+Example: Phir se car price prediction ki baat karte hain. Is case mein, aapka target variable "Car ka price" hoga. Aapka model is feature set ke against is target variable ko predict karne ki koshish karega.
+
+Summary
+Feature Selection: Un features ko select karna jo aapke model ke liye relevant hain.
+Target Selection: Woh variable define karna jise aap predict karna chahte hain (jaise car ka price).
+
+####################### CODE ########################################
+
+
+
+
+drop_columns = ['ID', 'ShortDescrip', 'Descrip', 'VitB6_USRDA', 'VitB12_USRDA', 'VitC_USRDA','VitE_USRDA','Zinc_USRDA']
+
+df = df.drop(columns=drop_columns)
+
+df.info()

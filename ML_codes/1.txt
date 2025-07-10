@@ -1,0 +1,26 @@
+Library import
+sbse pehle jo zaruri library he wo import krege
+
+
+
+df.to_csv('C:\\Users\\AFNAN KHAN\\Desktop\\df_final1.csv', index=False)   # ye desktop pr save krege df ko
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+time ko numeric formate me convert krna 
+df['Purchase Date'] = pd.to_datetime(df['Purchase Date'])
+df['Purchase Date'] = df['Purchase Date'].astype('int64') / 10**9
+df['Purchase Date'] = df['Purchase Date'].astype(int) / 10**9 

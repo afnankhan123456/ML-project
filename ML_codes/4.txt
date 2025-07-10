@@ -1,0 +1,84 @@
+@@@@@@@@@@ DATA CLEANING @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+1.MISSIN VALUE HANDEL 
+2.OUTLIER REMOVE
+3.DUPLICATE REMOVE
+4.CURRENT DATA TYPE
+
+df.isnull().sum()    #missing value check krega
+
+df.drop(columns= ["MSZoning"], inplace = True     #only column drop krega
+
+df.dropna(inplace =True    # ye wo sbhi rows drop kr dega jisme null vlaue he
+
+car['fuel_type'].fillna(car['fuel_type'].mode()[0], inplace=True)    ye sirf ek column ki value fill krega 
+
+
+unique_column = df['column_name'].unique()
+unique_column
+
+for i in df.select_dtypes(include='object').columns:           # ye code OBJECT data ki missing value fill krega
+    df[i] = df[i].fillna(df[i].mode()[0])
+
+                                                 # Categorical column ko check krna ki kon kon se he                            
+categorical_columns = df.select_dtypes(include=['object']).columns    
+print("Categorical columns:", categorical_columns) 
+
+mode yani string
+mean yani number
+
+
+################################### OUTLIER ##############################################
+df['Energy_kcal'].plot(kind='box') # is code me column type krte he or outlier dekhte rha
+plt.show()
+
+
+_______________ ya 
+
+Q1 = df['V2'].quantile(0.25)
+Q3 = df['V2'].quantile(0.75)
+IQR = Q3 - Q1
+
+print(((df['V2'] < (Q1 - 1.5 * IQR)) | (df['V2'] > (Q3 + 1.5 * IQR))).sum())
+________________________________________________
+def cleaning_data(dataset_name, clmn_name threshold):
+    for data in dataset_name.index:
+        if dataset_name.loc[data, clmn_name] > threshold:
+            dataset_name.drop(data, inplace=True)
+    return
+cleaning_data(dataset_name, 'clmn_name', 600000)
+
+######################################## DUPLICATE REMOVED #####################################################
+
+df.duplicated().sum()   #show duplicate
+ 
+
+df = df.drop_duplicates(keep='first')
+
+
+#################################################  CORRECT DATA TYPE #########  ####################################
+
+like rate column he jese 4.5/6   4.3/9 to / selesh ke bad ki value htane ke liye ye function bnaya he or ye bhi ki agr value me new ya none is tareh ka data ho wo hat jaye
+
+def HandleRate(value):
+    if value in ["NEW", None, "-", ""]:  # "NEW", NaN, "-", aur empty string ko check kare
+        return None  # Inhe ignore karna ya None return karna
+    try:
+        value = str(value).split('/')
+        return float(value[0])  # Attempt to convert to float
+    except ValueError:
+        return None  # Agar conversion mein error aaye to None return kare
+
+df["rate"] = df["rate"].apply(HandleRate)
+
+########################################## DUPLICATE CHECK AND REMOVE #######################################
+
+# prompt: duplicate rows check nad remove
+
+# Check for duplicate rows
+duplicate_rows_df = df[df.duplicated()]
+print("Number of duplicate rows:", duplicate_rows_df.shape)
+
+# Remove duplicate rows
+df.drop_duplicates(inplace=True)
+print("Number of rows after removing duplicates:", df.shape)

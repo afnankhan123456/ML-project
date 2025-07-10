@@ -1,0 +1,86 @@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ CHECK OVERFITING UNDERFITING CODE @@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score
+
+# Sample Data (Replace with your actual data)
+# X, y = your_data, your_labels
+
+# Data Splitting
+X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Model Training
+model = RandomForestClassifier()
+model.fit(X_train, y_train)
+
+# Predictions
+y_train_pred = model.predict(X_train)
+y_val_pred = model.predict(X_val)
+
+# Calculate Accuracy
+train_accuracy = accuracy_score(y_train, y_train_pred)
+val_accuracy = accuracy_score(y_val, y_val_pred)
+
+print('Training Accuracy:', train_accuracy)
+print('Validation Accuracy:', val_accuracy)
+
+%%%%%%5SITUATION KE HISAB SE KOI EK CHOICE KRE
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@  1. Regularization (Lasso and Ridge) @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+from sklearn.linear_model import Lasso, Ridge
+
+# L1 Regularization (Lasso)
+lasso_model = Lasso(alpha=0.1)  # alpha is the regularization strength
+lasso_model.fit(X_train, y_train)
+
+# L2 Regularization (Ridge)
+ridge_model = Ridge(alpha=0.1)
+ridge_model.fit(X_train, y_train)
+
+####################################################  2. Model Complexity Ghatao (Random Forest) #############################
+
+from sklearn.ensemble import RandomForestClassifier
+
+model = RandomForestClassifier(max_depth=10, n_estimators=50)  # Limiting complexity
+model.fit(X_train, y_train)
+
+######################################################################## 3. Cross-Validation #################################################
+
+from sklearn.model_selection import cross_val_score
+from sklearn.ensemble import RandomForestClassifier
+
+model = RandomForestClassifier()
+scores = cross_val_score(model, X, y, cv=5)  # 5-fold cross-validation
+print('Cross-Validation Scores:', scores)
+
+#####################################################################################  4. Ensemble Methods (Bagging with Random Forest)) ############################
+
+from sklearn.ensemble import BaggingClassifier
+from sklearn.tree import DecisionTreeClassifier
+
+base_model = DecisionTreeClassifier()
+bagging_model = BaggingClassifier(base_model, n_estimators=100)  # 50 trees in the ensemble
+bagging_model.fit(X_train, y_train)
+
+##############################################################
+
+
+# 4. Hyperparameter Tuning
+#Aap model ke hyperparameters ko tune karte hain taaki model ki performance ko enhance kiya ja sake. 
+
+from sklearn.model_selection import GridSearchCV
+
+# Hyperparameter Grid
+param_grid = {
+    'n_estimators': [50, 100, 150],
+    'max_depth': [None, 10, 20, 30]
+}
+
+# Grid Search
+grid_search = GridSearchCV(model, param_grid, cv=5)
+grid_search.fit(X, y)
+
+print("Best parameters:", grid_search.best_params_)
+print("Best score:", grid_search.best_score_)

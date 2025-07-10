@@ -1,0 +1,41 @@
+DATA ENCONDING
+
+1.LEBEL ENCONDING
+2.ORDINAL ENCONDING
+
+
+df['FoodGroup'].unique()  #unique value dekhe column ki
+
+################################# lebel enconding ###################################
+from sklearn.preprocessing import LabelEncoder
+
+le = LabelEncoder()
+le.fit_transform(df["FoodGroup"])   #yha apna column name dale
+
+df["en_FoodGroup"] = le.fit_transform(df["FoodGroup"])
+
+df = df.drop(columns=['FoodGroup'])  # ye enconding se pehle column ko drop kr dega
+
+                   
+
+#ya loop bht sare column ke liye
+from sklearn.preprocessing import LabelEncoder
+
+le = LabelEncoder()
+columns = ["Brand", "Product Name"]
+
+for column in columns:
+    df[column] = le.fit_transform(df[column])
+############################################## ordinal enconding ###################### jese: low, medium, high ########
+
+from sklearn.preprocessing import OrdinalEncoder
+                                
+oe = OrdinalEncoder(categories=ord_data)
+oe.fit(df[['self_employed']])
+
+oe.transform(df[['self_employed']])    #yha enconding ho gyi  
+                                 
+                          
+df["self_employed_oe"] = oe.transform(df[['self_employed']])     #NEW COLUMN BNA KR DF ME SAV KRNA   
+df.drop(columns=['self_employed'], inplace=True)     #ENCONDING SE PEHLA COLUMN DEL KRNA
+df.head(3) 

@@ -1,0 +1,15 @@
+import re  # Regular expression for pattern matching and text cleaning
+import nltk  # NLP library used for downloading and handling stopwords
+from nltk.corpus import stopwords  # To import English stopwords
+
+nltk.download('stopwords')  # Downloads stopwords from NLTK corpus
+stop_words = set(stopwords.words('english'))  # Converts stopwords list into a set for faster lookup
+
+def clean_text(text):
+    text = str(text).lower()  # Converts text to lowercase
+    text = re.sub(r'[^a-z0-9\s]', ' ', text)  # Removes special characters and punctuation
+    text = re.sub(r'\s+[a-z]\s+|^[a-z]\s+', ' ', text)  # Removes single characters from middle and beginning
+    text = re.sub(r'\s+', ' ', text).strip()  # Replaces multiple spaces with single space and trims text
+    return ' '.join([w for w in text.split() if w not in stop_words])  # Removes stopwords from the text
+
+x['cleaned_text'] = x['text'].apply(clean_text)  # Applies clean_text function to each row and creates a new column

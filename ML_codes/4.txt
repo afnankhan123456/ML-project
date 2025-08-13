@@ -7,6 +7,8 @@
 
 df.isnull().sum()    #missing value check krega
 
+df = df.dropna()      mising vlaue drop krna 
+
 df.drop(columns= ["MSZoning"], inplace = True     #only column drop krega
 
 df.dropna(inplace =True    # ye wo sbhi rows drop kr dega jisme null vlaue he
@@ -35,11 +37,17 @@ plt.show()
 
 _______________ ya 
 
-Q1 = df['V2'].quantile(0.25)
-Q3 = df['V2'].quantile(0.75)
+Q1 = df['Selary'].quantile(0.25)
+Q3 = df['Selary'].quantile(0.75)
 IQR = Q3 - Q1
 
-print(((df['V2'] < (Q1 - 1.5 * IQR)) | (df['V2'] > (Q3 + 1.5 * IQR))).sum())
+lower_bound = Q1 - 1.5 * IQR
+upper_bound = Q1 + 1.5 * IQR
+
+df_no_outlier = df[(df['Selary'] >= lower_bound) & (df['Selary'] <= upper_bound)]
+print(f"Before: {df.shape[0]} rows")
+print(f"Aftar: {df_no_outlier[0]} rows")
+
 ________________________________________________
 def cleaning_data(dataset_name, clmn_name threshold):
     for data in dataset_name.index:
